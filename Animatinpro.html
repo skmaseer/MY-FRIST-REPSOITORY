@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Start Stop</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: white;
+            text-align: center;
+        }
+
+        .car {
+            position: absolute;
+            top: 40px;
+            left: -200px;
+            width: 150px;
+        }
+
+        .buttons {
+            margin-top: 150px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<img src="Z:\HTML\car.jpg" id="car" class="car">
+
+<div class="buttons">
+    <button onclick="startCar()">Start</button>
+    <button onclick="stopCar()">Stop</button>
+</div>
+
+<script>
+    const car = document.getElementById("car");
+    let position = -200;
+    let animationId = null;
+
+    function moveCar() {
+        position += 5;
+
+        if (position > window.innerWidth) {
+            position = -200;
+        }
+
+        car.style.left = position + "px";
+        animationId = requestAnimationFrame(moveCar);
+    }
+
+    function startCar() {
+        if (!animationId) {   // prevent multiple animations
+            moveCar();
+        }
+    }
+
+    function stopCar() {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+</script>
+
+</body>
+</html>
